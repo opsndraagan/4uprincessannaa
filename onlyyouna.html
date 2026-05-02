@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <title>Notes</title>
+
+
+<style>
+    body {
+        margin:  0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', math-italic;
+        background: #0f172a;
+        color: #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .box {
+        max-width: 480px;
+        padding: 40px;
+        background: #111827;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .fade {
+        opacity: 0;
+        transform: translateY(8px);
+        animation: fadeIn 0.8s ease forwards;   
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .date {
+        margin-top: 20px;
+        font-size: 0.8em;
+        color: #9ca3af;
+        cursor: pointer;
+    }
+
+    </style>
+    </head>
+    <body>
+        <div class='box'>
+            <div id='text'></div>
+            <div class='date' id='date'></div>
+            <div class='music-btn' onclick="playMusic()">tap to enable sound</div>
+        </div>
+
+        <audio id='bgm' loop>
+            <source src="music.mp3" type="audio/mpeg">
+            </audio>
+
+        <script>
+            const message = [
+                "Hi Cutie Princess,",
+                "",
+                "I know I'm not always the easiest person to understand or wait for,",
+                "and that's something I'm aware of.",
+                "So I just want to say thank you for still being here,",
+                "for not rushing me,",
+                "and for not walking away when things weren't clear.",
+                "That kind of patience isn't something I take lightly.",
+                "",
+                "",
+                "--Ell"
+            ];
+
+            let i =0;
+
+            function showMessage() {
+                const el = document.getElementById('text');
+
+                if (i < message.length) {
+                    const line = document.createElement('div');
+                    line.className = 'fade';
+                    line.innerText = message[i];
+                    el.appendChild(line);
+                    i++;
+                    setTimeout(showMessage, 600);
+                }
+            }
+            showMessage();
+
+// tanggal
+document.getElementById('date').innerText = new Date().toLocaleDateString();
+
+// music
+const audio = document.getElementById('bgm');
+
+// autoplay
+window.addEventListener('load', () => {
+    audio.volume = 0.4;
+    audio.play().catch(() => {
+
+    });
+});
+
+function playMusic() {
+    audio.volume = 0.4;
+    audio.play();
+}
+      
+    </script>
+    </body>
+    </html>
+
